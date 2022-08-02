@@ -7,7 +7,6 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import CarouselArrow from "../components/carouselArrow"
 import '../styles/index.scss'
 import Overlay from "../components/overlay/overlay";
-import OwlCarousel from "react-owl-carousel"
 
 const PREFIX = 'Home';
 
@@ -56,8 +55,14 @@ const IndexPage = props => {
 
   // Get access to the owl carousel methods
   const owlRef = useRef();
-  const handleNextSlide = () => owlRef.current?.$ele?.trigger('next.owl.carousel')
-  const handlePrevSlide = () => owlRef.current?.$ele?.trigger('prev.owl.carousel')
+  const handleNextSlide = () =>  {
+    if (typeof window !== `undefined`)
+      owlRef.current?.$ele?.trigger('next.owl.carousel') 
+  }
+  const handlePrevSlide = () => {
+    if (typeof window !== `undefined`)
+      owlRef.current?.$ele?.trigger('prev.owl.carousel') 
+  }
 
   const settings = {
     responsive: {
@@ -84,34 +89,36 @@ const IndexPage = props => {
       project.slug = project.project_name.split(" ").map(word => word.toLowerCase()).join("-")
     }
   })
-  
-  return (
-    <Root style={{ margin: "10px", position: "relative" }}>
-      <Seo title="" />
-      <OwlCarousel ref={owlRef} className="owl-loaded" {...settings}>
-        {homeData.map(({ node: project }, i) => (
-            <div 
-              key={i}
-              onClick={() => props.route(`/projects/${project.slug}`)}
-              role="link"
-              onKeyDown={e => { if (e.code === "Enter") props.route(`/projects/${project.slug}`) }}
-            >
-              <GatsbyImage
-                image={project.cover_image.src.childImageSharp.gatsbyImageData}
-                alt={project.project_name}
-                style={{ width: "100%" }}
-              />
-              <Overlay classes={`overlay ${classes.overlay}`} project={project} />
-            </div>
-          )
-        )}
-      </OwlCarousel>
-      <div className="owl-custom-nav">
-        <CarouselArrow className="owl-nav-prev" prevDirection={true} onClick={handlePrevSlide} />
-        <CarouselArrow className="owl-nav-next" prevDirection={false} onClick={handleNextSlide} />
-      </div>
-    </Root>
-  );
+  if (typeof window !== `undefined`) {
+    const OwlCarousel = require("react-owl-carousel")
+    return (
+      <Root style={{ margin: "10px", position: "relative" }}>
+        <Seo title="" />
+        <OwlCarousel ref={owlRef} className="owl-loaded" {...settings}>
+          {homeData.map(({ node: project }, i) => (
+              <div 
+                key={i}
+                onClick={() => props.route(`/projects/${project.slug}`)}
+                role="link"
+                onKeyDown={e => { if (e.code === "Enter") props.route(`/projects/${project.slug}`) }}
+              >
+                <GatsbyImage
+                  image={project.cover_image.src.childImageSharp.gatsbyImageData}
+                  alt={project.project_name}
+                  style={{ width: "100%" }}
+                />
+                <Overlay classes={`overlay ${classes.overlay}`} project={project} />
+              </div>
+            )
+          )}
+        </OwlCarousel>
+        <div className="owl-custom-nav">
+          <CarouselArrow className="owl-nav-prev" prevDirection={true} onClick={handlePrevSlide} />
+          <CarouselArrow className="owl-nav-next" prevDirection={false} onClick={handleNextSlide} />
+        </div>
+      </Root>
+    );
+  }
 }
 
 IndexPage.Layout = Layout

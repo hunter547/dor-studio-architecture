@@ -7,11 +7,6 @@
 // You can delete this file if you're not using it
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
-    externals: {
-      $: 'jQuery',
-      jQuery: 'jQuery',
-      'window.jQuery': 'jQuery'
-    },
     module: {
       rules: [
         // Load in a png from the owl-carosel.css (node_modules/owl.carousel/dist/assets/owl.carousel.css:160)
