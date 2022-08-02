@@ -96,8 +96,9 @@ const IndexPage = props => {
         <Seo title="" />
         <OwlCarousel ref={owlRef} className="owl-loaded" {...settings}>
           {homeData.map(({ node: project }, i) => (
-              <div 
+              <div
                 key={i}
+                className="owl-carousel-item"
                 onClick={() => props.route(`/projects/${project.slug}`)}
                 role="link"
                 onKeyDown={e => { if (e.code === "Enter") props.route(`/projects/${project.slug}`) }}
