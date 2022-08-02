@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
 @import url("slick-carousel/slick/slick.css");
 @import url("slick-carousel/slick/slick-theme.css");
+@import url("owl.carousel/dist/assets/owl.carousel.css");
+@import url("owl.carousel/dist/assets/owl.theme.default.css");
 #___gatsby,
 #gatsby-focus-wrapper {
   height: 100%;
@@ -237,6 +239,16 @@ li > p {
 .discrete-link {
   color: inherit;
   text-decoration: none;
+}
+.owl-dots {
+  height: 0;
+  line-height: 0;
+}
+.owl-nav {
+  height: 0;
+}
+.owl-nav-next:hover, .owl-nav-prev:hover {
+  background-color: #fff;
 }
 @media only screen and (max-width: 480px) {
   html {
