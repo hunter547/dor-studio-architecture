@@ -17,6 +17,7 @@ const CarouselArrow = ({ prevDirection, shiftAmount, className, onClick }) => {
       position: 'absolute',
       width: '2.5rem',
       height: '2.5rem',
+      top: 'calc(50% - 1.25rem)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -34,9 +35,9 @@ const CarouselArrow = ({ prevDirection, shiftAmount, className, onClick }) => {
       className={`${className}`} 
       onClick={onClick}
       style={prevDirection ? 
-          { marginLeft: shiftAmount ? shiftAmount : 0, ...styles.iconContainer } 
+          { left: 0, marginLeft: shiftAmount ? shiftAmount : 0, ...styles.iconContainer } 
         : 
-          { marginRight: shiftAmount ? shiftAmount : 0, ...styles.iconContainer }
+          { right: 0, marginRight: shiftAmount ? shiftAmount : 0, ...styles.iconContainer }
       }
       role="none"
     >

@@ -14,10 +14,28 @@ $white: #fff;
   line-height: 1.25rem;
   transition: all 0.4s ease-in-out;
   opacity: 0;
-  cursor: pointer;
 }
-.overlay:hover {
-  opacity: 1;
+
+.owl-carousel-item:hover {
+  cursor: pointer;
+  .overlay {
+    opacity: 1;
+  }
+  .overlay-inner:before {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-top: 0.0625rem solid $white;
+    border-right: 0.0625rem solid $white;
+  }
+  .overlay-inner.portfolio:before {
+    width: 100%;
+    height: 100%;
+    border: 0.0625rem solid $white;
+  }
 }
 
 .overlay-inner {
@@ -27,7 +45,7 @@ $white: #fff;
     inset: 0.625rem;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
   }
 }
 
@@ -43,23 +61,6 @@ $white: #fff;
   width: 100%;
   height: 100%;
   transition: 0.4s;
-}
-
-.overlay:hover .overlay-inner:before {
-  width: 2.5rem;
-  height: 2.5rem;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  border-top: 0.0625rem solid $white;
-  border-right: 0.0625rem solid $white;
-}
-
-.overlay:hover .overlay-inner.portfolio:before {
-  width: 100%;
-  height: 100%;
-  border: 0.0625rem solid $white;
 }
 
 .overlay-text {
@@ -94,8 +95,8 @@ $white: #fff;
   margin-bottom: 0;
 }
 
-.overlay:hover .text-header,
-.overlay:hover .text-subheader {
+.owl-carousel-item:hover .text-header,
+.owl-carousel-item:hover .text-subheader {
   opacity: 1;
 }
 

@@ -6,6 +6,17 @@
 
 // You can delete this file if you're not using it
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        // Load in a png from the owl-carosel.css (node_modules/owl.carousel/dist/assets/owl.carousel.css:160)
+        {
+          test: /\.(png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'file-loader'
+        }
+      ],
+    },
+  })
   if (stage === 'build-html') {
     actions.setWebpackConfig({
       module: {
@@ -13,7 +24,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
           {
             test: /react-leaflet|leaflet/,
             use: loaders.null(),
-          },
+          }
         ],
       },
     })
@@ -97,7 +108,7 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
           link: `${nextProject.slug}/`
         }
       }
-      
+
       const { slug, ...project } = edge.node;
       
       createPage({
